@@ -8,16 +8,15 @@ var answer
 // when click the startBtn, timer starts and block-making starts
 function startGame(num) {
   // to avoid more than one timer to be active
-  if (timer === null) {
-    timer = setInterval(timerunning, 1000)
-  }
+  if (timer === null) timer = setInterval(timeRunning, 1000)
+
   timeLeft.innerHTML = timeCount
   score.innerHTML = 0
   makeBlock(num)
 }
 
 function makeBlock(num) {
-  // the total quantity of blocks eual to (num of block in width) * (num of block in height) 
+  // the total quantity of blocks equal to (num of block in width) * (num of block in height) 
   var blocks = num * num
   // let the answer to be a random integer from 0-1
   answer = Math.floor(Math.random() * blocks)
@@ -29,7 +28,10 @@ function makeBlock(num) {
 
   for (let i = 0; i < blocks; i++) {
     // only the answer-block would have opacity
+
     if (i === answer) {
+      if (answer === 0) answer = 1
+
       main.innerHTML += `
         <div class="block"
           style="background-color:rgb(${r},${g},${b}); opacity:${difficulty};"
@@ -68,9 +70,7 @@ function makeBlock(num) {
 
 // when selecting the correct block, score add one
 function check(correct) {
-  if (correct === answer) {
-    score.innerHTML = parseInt(score.innerHTML) + 1
-  }
+  if (correct === answer) score.innerHTML = parseInt(score.innerHTML) + 1
 
   if (parseInt(score.innerHTML) === 1) {
     makeBlock(2)
@@ -86,7 +86,7 @@ function check(correct) {
 }
 
 // timer running
-function timerunning() {
+function timeRunning() {
   timeLeft.innerHTML = parseInt(timeLeft.innerHTML) - 1
   if (parseInt(timeLeft.innerHTML) === 0) {
     clearInterval(timer)
